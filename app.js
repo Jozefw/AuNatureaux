@@ -1,11 +1,16 @@
 const express = require('express');
+const fs = require('fs');
 
 const app = express();
 
-app.get('/',(req,resp)=>{
+const tours = JSON.parse(fs.readFileSync(`$(__dirname)/dev-data/data/tours-simple.json`));
+
+app.get('/api/v1/tours',(req,resp)=>{
     resp
     .status(200)
-    .json({message:"Server response from root page",app:"AuNatureaux"})
+    .json({
+        status:'success',
+        tours:tours
 })
 
 app.post('/',(req,resp)=>{
