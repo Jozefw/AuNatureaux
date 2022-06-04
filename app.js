@@ -11,6 +11,7 @@ app.get('/api/v1/tours',(req,res)=>{
         results:tours.length,
         data:{tours}
 })
+})
 
 app.post('/api/v1/tours ',(req,res)=>{
     console.log(req.body)
