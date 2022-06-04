@@ -3,6 +3,11 @@ const express = require('express');
 
 const app = express();
 app.use(express.json());
+app.use((req,res,next)=>{
+    console.log("middleware");
+    next();
+})
+
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
 
@@ -93,8 +98,6 @@ app.route('/api/v1/tours/:id')
 .get(getSingleTour)
 .patch(updateTour)
 .delete(deleteTour)
-
-
 
 const port = 3000;
 app.listen(port, () => {
