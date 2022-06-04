@@ -1,8 +1,19 @@
 const fs = require('fs');
 const express = require('express');
+const req = require('express/lib/request');
 
 const app = express();
 app.use(express.json());
+
+app.use((req,res,next)=>{
+    console.log("middlewear middle earth");
+    next();
+});
+
+app.use((req,res,next)=>{
+    req.getTime = new Date().toIsoString();
+    next();
+})
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
 
@@ -10,6 +21,7 @@ const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simpl
 const getAllTours = (req,res) =>{
     res.status(200).json({
         status: 'success',
+        time:req.getTime(),
         results: tours.length,
         data:{tours}
         
