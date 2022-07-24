@@ -106,43 +106,40 @@ const deleteTour = (req, res) => {
 const getAllUsers = (req,res) => {
     res.status(500).json({
         status:500,
-        message:"Route not create yet"
+        message:"Route not created yet"
     })
 
 }
 const createUser = (req,res) => {
     res.status(500).json({
         status:500,
-        message:"Route not create yet"
+        message:"Route not created yet"
     })
 
 }
 const getUser = (req,res) => {
     res.status(500).json({
         status:500,
-        message:"Route not create yet"
+        message:"Route not created yet"
     })
 
 }
 const updateUser = (req,res) => {
     res.status(500).json({
         status:500,
-        message:"Route not create yet"
+        message:"Route not created yet"
     })
 
 }
 const deleteUser = (req,res) => {
     res.status(500).json({
         status:500,
-        message:"Route not create yet"
+        message:"Route not created yet"
     })
-
 }
 
 
 // ROUTES
-app.use('/api/v1/tours',tourRouter);
-app.use('/api/vi/users',userRouter);
 
 tourRouter
 .route('/')
@@ -166,7 +163,8 @@ userRouter
 .patch(updateUser)
 .delete(deleteUser)
 
-
+app.use('/api/v1/tours',tourRouter);
+app.use('/api/vi/users',userRouter);
 
 // RUN SERVER 
 const port = 3000;
