@@ -1,6 +1,8 @@
 const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
+const tourRouter = express.Router()
+const userRouter = express.Router()
 
 
 // MIDDLEWARE 
@@ -30,7 +32,6 @@ const getAllTours = (req,res) =>{
         time:req.getTime(),
         results: tours.length,
         data:{tours}
-        
     })
 }
 
@@ -140,29 +141,34 @@ const deleteUser = (req,res) => {
 
 
 // ROUTES
+app.use('/api/v1/tours',tourRouter);
+app.use('/api/vi/users',userRouter);
 
-app.route('/api/v1/tours/')
+tourRouter
+.route('/')
 .get(getAllTours)
 .post(createTour)
 
-app.route('/api/v1/tours/:id')
+tourRouter
+.route('/:id')
 .get(getSingleTour)
 .patch(updateTour)
 .delete(deleteTour)
 
-<<<<<<< HEAD
-=======
-app.route('/api/vi/users')
+userRouter
+.route('/')
 .get(getAllUsers)
 .post(createUser)
 
-app.route('/api/vi/users/:id')
+userRouter
+.route('/:id')
 .get(getUser)
 .patch(updateUser)
 .delete(deleteUser)
 
+
+
 // RUN SERVER 
->>>>>>> 8b77ab7483a77697b630b010200b274be8bfd3a2
 const port = 3000;
 app.listen(port, () => {
     console.log(`App running on PORT ${port}...`)
