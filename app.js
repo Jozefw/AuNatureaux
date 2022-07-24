@@ -165,7 +165,7 @@ userRouter
 .delete(deleteUser)
 
 app.use('/api/v1/tours',tourRouter);
-app.use('/api/vi/users',userRouter);
+app.use('/api/v1/users',userRouter);
 
 // RUN SERVER 
 const port = 3000;
