@@ -1,8 +1,8 @@
 const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
-const tourRouter = express.Router()
-const userRouter = express.Router()
+const tourRouter = express.Router();
+const userRouter = express.Router();
 
 
 // MIDDLEWARE 
@@ -13,12 +13,13 @@ app.use(morgan('dev'));
 
 
 app.use((req,res,next)=>{
-    console.log("middlewear middle earth");
+    console.log("middlewear for middle earth");
     next();
 });
 
 app.use((req,res,next)=>{
-    req.getTime = new Date().toIsoString();
+    req.getTime = new Date().toISOString();
+    console.log(req.getTime);
     next();
 })
 
@@ -29,7 +30,7 @@ const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simpl
 const getAllTours = (req,res) =>{
     res.status(200).json({
         status: 'success',
-        time:req.getTime(),
+        time:req.getTime,
         results: tours.length,
         data:{tours}
     })
