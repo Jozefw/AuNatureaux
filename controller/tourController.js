@@ -14,15 +14,15 @@ const Tour = require('../models/tourModel');
 //   next();
 // };
 
-exports.checkBody = (req, res, next) => {
-  if (!req.body.name || !req.body.price) {
-    return res.status(400).json({
-      status: 'Fail',
-      message: 'Name or Price Missing',
-    });
-  }
-  next();
-};
+// exports.checkBody = (req, res, next) => {
+//   if (!req.body.name || !req.body.price) {
+//     return res.status(400).json({
+//       status: 'Fail',
+//       message: 'Name or Price Missing',
+//     });
+//   }
+//   next();
+// };
 
 // ROUTE HANDLERS
 exports.getAllTours = (req, res) => {
