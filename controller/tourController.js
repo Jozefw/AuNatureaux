@@ -44,13 +44,21 @@ exports.getSingleTour = (req, res) => {
   // });
 };
 
-exports.createTour = (req, res) => {
-  res.status(201).json({
-    status: 'success',
-    // data: {
-    //   tour: newTour,
-    // },
-  });
+exports.createTour = async (req, res) => {
+  try {
+ const newTour =  await Tour.create(req.body);
+    res.status(201).json({
+      status: 'success',
+      data: {
+        tour: newTour,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
+  }
   // const newId = tours[tours.length - 1].id + 1;
   // // eslint-disable-next-line node/no-unsupported-features/es-syntax
   // const newTour = { newId, ...req.body };
