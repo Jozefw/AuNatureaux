@@ -1,4 +1,3 @@
-const { findByIdAndUpdate } = require('../models/tourModel');
 const Tour = require('../models/tourModel');
 
 // const tours = JSON.parse(
@@ -28,7 +27,9 @@ const Tour = require('../models/tourModel');
 // ROUTE HANDLERS
 exports.getAllTours = async (req, res) => {
   try {
-    const allTours = await Tour.find();
+    const { page, sort, limit, fields, ...queryObj } = req.query;
+    console.log(req.query, queryObj, page, sort, limit, fields);
+    const allTours = await Tour.find(queryObj);
     res.status(200).json({
       status: 'success',
       results: allTours.length,
@@ -69,7 +70,7 @@ exports.createTour = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: 'Invalid data sent',
+      message: err,
     });
   }
   // const newId = tours[tours.length - 1].id + 1;
