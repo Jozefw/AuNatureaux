@@ -28,8 +28,19 @@ const Tour = require('../models/tourModel');
 exports.getAllTours = async (req, res) => {
   try {
     const { page, sort, limit, fields, ...queryObj } = req.query;
-    console.log(req.query, queryObj, page, sort, limit, fields);
-    const allTours = await Tour.find(queryObj);
+    let queryString = JSON.stringify(queryObj);
+    queryString = queryString.replace(
+      /\b(gte|lte|lt|gt)\b/g,
+      (match) => `$${match}`
+    );
+    console.log(queryString);
+    let preTours = Tour.find(JSON.parse(queryString));
+    if (sort) {
+      preTours = preTours.sort(sort);
+    }
+    // console.log(allTours);
+    const allTours = await preTours;
+    // console.log(allTours);
     res.status(200).json({
       status: 'success',
       results: allTours.length,
