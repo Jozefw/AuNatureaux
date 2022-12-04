@@ -36,7 +36,10 @@ exports.getAllTours = async (req, res) => {
     console.log(queryString);
     let preTours = Tour.find(JSON.parse(queryString));
     if (sort) {
-      preTours = preTours.sort(sort);
+      const sortBy = sort.split(',').join(' ');
+      preTours = preTours.sort(sortBy);
+    } else {
+      preTours = preTours.sort('-createdAt');
     }
     // console.log(allTours);
     const allTours = await preTours;
